@@ -1,0 +1,29 @@
+
+<codestructure version="2.1.0">
+<phptree>
+<treenode node="db.php;PHP:PHP Include;1111008969;f14;2;20;2;;784464859;f14;2;20;2;;3616093958;f14;2;20;2;;1226166425;f14;2;20;2;;981508154;f14;2;20;2;;3663044592;f14;2;20;2;;;;vpos;;v;;a;;r;;d-1,-1;;b0,0;;m0;;e0;;i0;;o;;k;;l;;n">
+</treenode>
+</phptree>
+<jstree>
+<treenode node="addMarker;JS:Function Name;3609564779;f0;103;9;121;;;;vpos;;v;;aObject_;;c;;r&#10;&lt;b&gt;Definition&lt;/b&gt;&#10;    function addMarker(location, title, infoContent)&#10;&#10;&lt;b&gt;Description&lt;/b&gt;&#10;    Adds a marker to the map.&#10;&#10;&lt;b&gt;Parameters:&lt;/b&gt;&#10;    object &lt;b&gt;location&lt;/b&gt;: Object with lat and lng properties.&#10;    string &lt;b&gt;title&lt;/b&gt;: Title for the marker.&#10;    string &lt;b&gt;infoContent&lt;/b&gt;: Content for the info window.;;d57,103;;b0,0;;m0;;e0;;i0;;o;;k;;lobject location;;pstring title;;pstring infoContent;;p;;x;;x;;x;;n">
+</treenode>
+<treenode node="clearMarkers;JS:Function Name;3609564779;f0;126;9;131;;;;vpos;;v;;aObject_;;c;;r&#10;&lt;b&gt;Definition&lt;/b&gt;&#10;    function clearMarkers()&#10;&#10;&lt;b&gt;Description&lt;/b&gt;&#10;    Clears all markers from the map.;;d32,126;;b0,0;;m0;;e0;;i0;;o;;k;;l;;n">
+</treenode>
+<treenode node="initMap;JS:Function Name;3609564779;f0;83;9;95;;;;vpos;;v;;aObject_;;c;;r&#10;&lt;b&gt;Definition&lt;/b&gt;&#10;    function initMap()&#10;&#10;&lt;b&gt;Description&lt;/b&gt;&#10;    Initializes the Google Map.&#10;This function is called by the Google Maps API once it&apos;s loaded (due to the `callback=initMap` in the script URL).;;d27,83;;b0,0;;m0;;e0;;i0;;o;;k;;l;;n">
+</treenode>
+<treenode node="pharmacy;JS:Function Name;3609564779;f40;173;13;207;;;;vpos;;v;;a;;r;;d52,173;;b0,0;;m0;;e0;;i0;;o;;k;;l;;n">
+</treenode>
+<treenode node="foundResults;JS:JS Var Name;3609564779;f16;172;28;172;;;;vpos;;v;;a;;r;;d-1,-1;;b0,3;;m0;;e0;;i0;;o;;k;;l;;n">
+</treenode>
+<treenode node="map;JS:JS Var Name;3609564779;f12;76;15;76;;;;vpos;;v;;a;;r;;d-1,-1;;b0,3;;m0;;e0;;i0;;o;;k;;l;;n">
+</treenode>
+<treenode node="markers;JS:JS Var Name;3609564779;f12;77;19;77;;;;vpos;;v;;a;;r;;d-1,-1;;b0,3;;m0;;e0;;i0;;o;;k;;l;;n">
+</treenode>
+<treenode node="searchInput;JS:JS Var Name;3609564779;f18;137;29;137;;;;vposdocument.getElementById.value;;v;;a;;r;;d-1,-1;;b0,0;;m0;;e0;;i0;;o;;k;;l;;n">
+</treenode>
+<treenode node="simulatedPharmacies;JS:JS Var Name;3609564779;f18;148;37;148;;;;vpos;;v;;a;;r;;d-1,-1;;b0,0;;m0;;e0;;i0;;o;;k;;l;;n">
+</treenode>
+</jstree>
+<pythontree>
+</pythontree>
+</codestructure>

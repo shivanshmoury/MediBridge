@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MediBridge - Find Nearby Pharmacies & Clinics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            padding-top: 56px;
+        }
+        /* Ensure the map container has a defined height */
+        #map {
+            height: 400px; /* Adjust height as needed */
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">MediBridge</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pharmacy_login.html">Pharmacy Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pharmacy_register.html">Pharmacy Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <main class="container mt-4">
+        <h1 class="mb-4">Find Nearby Pharmacies & Clinics</h1>
+        <!-- Search form will go here -->
+        <div id="search-section">
+            <form id="search-form" class="row g-3">
+                <div class="col-md-8">
+                    <input type="text" class="form-control" id="search-input" placeholder="Enter medicine or symptom" required />
+                </div>
+                <div class="col-md-4 d-grid">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Search results -->
+        <div id="results" class="mt-4 row row-cols-1 row-cols-md-2 g-4">
+            <!-- Pharmacy cards will be dynamically inserted here -->
+        </div>
+
+        <!-- Google Map -->
+        <div id="map" class="mt-4"></div>
+    </main>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Google Maps JavaScript API with your API key and callback function -->
+    <!-- Replace 'AIzaSyCrs35rEzvVvF0Zd5frR27qN7AD2MTRyJI' with your actual Google Maps API Key -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrs35rEzvVvF0Zd5frR27qN7AD2MTRyJI&callback=initMap" async defer></script>
+
+    <!-- Custom JavaScript for Google Map initialization and application logic -->
+    <script>
+        let map; // Declare map globally so it can be accessed by other functions
+        let markers = []; // Array to store markers
+
+        /**
+         * Initializes the Google Map.
+         * This function is called by the Google Maps API once it's loaded (due to the `callback=initMap` in the script URL).
+         */
+        function initMap() {
+            // Default location: Amsterdam, Netherlands
+            const defaultLocation = { lat: 52.3676, lng: 4.9041 }; 
+
+            // Create a new map object and specify the DOM element for display.
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: defaultLocation,
+                zoom: 12, // Initial zoom level
+            });
+
+            // Optional: Add a marker for the default location
+            addMarker(defaultLocation, "Amsterdam", "Default starting point");
+        }
+
+        /**
+         * Adds a marker to the map.
+         * @param {object} location - Object with lat and lng properties.
+         * @param {string} title - Title for the marker.
+         * @param {string} infoContent - Content for the info window.
+         */
+        function addMarker(location, title, infoContent) {
+            const marker = new google.maps.Marker({
+                position: location,
+                map: map,
+                title: title,
+            });
+
+            // Create an info window
+            const infoWindow = new google.maps.InfoWindow({
+                content: infoContent,
+            });
+
+            // Add a click listener to open the info window
+            marker.addListener("click", () => {
+                infoWindow.open(map, marker);
+            });
+
+            markers.push(marker); // Store marker for later management (e.g., clearing)
+        }
+
+        /**
+         * Clears all markers from the map.
+         */
+        function clearMarkers() {
+            for (let i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+            }
+            markers = [];
+        }
+
+        // Handle search form submission (for demonstration purposes)
+        document.getElementById("search-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const searchInput = document.getElementById("search-input").value;
+            console.log("Searching for:", searchInput);
+
+            // In a real application, you would send this search term to a backend
+            // or a more sophisticated API (e.g., Google Places API) to get pharmacy data.
+            // For now, let's simulate some results and update the map/results section.
+
+            clearMarkers(); // Clear existing markers before showing new results
+            document.getElementById("results").innerHTML = ''; // Clear previous results
+
+            // Simulate finding some pharmacies based on the search input
+            const simulatedPharmacies = [
+                {
+                    name: "MediCare Pharmacy",
+                    address: "123 Main St, Amsterdam",
+                    lat: 52.370216,
+                    lng: 4.895168,
+                    medicines: ["Paracetamol", "Ibuprofen", "Amoxicillin"]
+                },
+                {
+                    name: "Central Clinic & Pharmacy",
+                    address: "456 Oak Ave, Amsterdam",
+                    lat: 52.368817,
+                    lng: 4.905668,
+                    medicines: ["Aspirin", "Antibiotics"]
+                },
+                {
+                    name: "Green Valley Pharma",
+                    address: "789 Pine Ln, Amsterdam",
+                    lat: 52.360000,
+                    lng: 4.910000,
+                    medicines: ["Cetirizine", "Ventolin"]
+                }
+            ];
+
+            let foundResults = false;
+            simulatedPharmacies.forEach(pharmacy => {
+                // Simple check if search input matches medicine or part of name/address
+                const lowerSearchInput = searchInput.toLowerCase();
+                const matchesMedicine = pharmacy.medicines.some(med => med.toLowerCase().includes(lowerSearchInput));
+                const matchesName = pharmacy.name.toLowerCase().includes(lowerSearchInput);
+                const matchesAddress = pharmacy.address.toLowerCase().includes(lowerSearchInput);
+
+                if (matchesMedicine || matchesName || matchesAddress) {
+                    foundResults = true;
+                    // Add marker to map
+                    addMarker(
+                        { lat: pharmacy.lat, lng: pharmacy.lng },
+                        pharmacy.name,
+                        `<strong>${pharmacy.name}</strong><br>${pharmacy.address}<br>Available: ${pharmacy.medicines.join(', ')}`
+                    );
+
+                    // Add card to results section
+                    const resultCard = `
+                        <div class="col">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">${pharmacy.name}</h5>
+                                    <p class="card-text">
+                                        <i class="bi bi-geo-alt-fill"></i> ${pharmacy.address}<br>
+                                        <strong>Available Medicines:</strong> ${pharmacy.medicines.join(', ')}
+                                    </p>
+                                    <a href="#" class="btn btn-sm btn-outline-primary" 
+                                       onclick="map.setCenter({lat: ${pharmacy.lat}, lng: ${pharmacy.lng}}); map.setZoom(15);">View on Map</a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    document.getElementById("results").insertAdjacentHTML('beforeend', resultCard);
+                }
+            });
+
+            if (!foundResults) {
+                document.getElementById("results").innerHTML = `
+                    <div class="col-12">
+                        <div class="alert alert-info" role="alert">
+                            No pharmacies or clinics found matching your search.
+                        </div>
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
